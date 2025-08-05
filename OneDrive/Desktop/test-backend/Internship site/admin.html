@@ -347,9 +347,9 @@
     async function fetchDashboardStats() {
       try {
         const [internRes, studentRes, applyRes] = await Promise.all([
-          fetch('${API_BASE_URL}/api/internships'),
-          fetch('${API_BASE_URL}/api/students'),
-          fetch('${API_BASE_URL}/api/applied')
+          fetch(`${API_BASE_URL}/api/internships`),
+          fetch(`${API_BASE_URL}/api/students`),
+          fetch(`${API_BASE_URL}/api/applied`)
         ]);
 
         const internships = await internRes.json();
@@ -367,7 +367,7 @@
     // Load applications table
     async function loadApplications() {
       try {
-        const res = await fetch('${API_BASE_URL}/api/admin/applications');;
+        const res = await fetch(`${API_BASE_URL}/api/admin/applications`);;
         const apps = await res.json();
         const tbody = document.querySelector("#applicationsTable tbody");
         tbody.innerHTML = "";
