@@ -1,0 +1,177 @@
+<!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Login Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <style>
+      .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+      }
+
+      .login-card {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .role-tabs {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+      }
+
+      .role-tabs button {
+        flex: 1;
+        padding: 10px;
+        font-weight: 500;
+        background-color: #f1f5f9;
+        border: 1px solid #ccc;
+        cursor: pointer;
+      }
+
+      .role-tabs button.active {
+        background-color: #2563eb;
+        color: white;
+        border: 1px solid #0051ff;
+      }
+
+      .form-group {
+        margin-top: 15px;
+      }
+
+      .login-action-btn2 {
+        margin-top: 20px;
+        width: 50%;
+        border-color: #020202;
+        background-color: #ffffff7a;
+        color: rgb(0, 0, 0);
+      }
+
+      .msg {
+        margin-top: 15px;
+        padding: 10px;
+        display: none;
+        border-radius: 6px;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      .success { background: #dcfce7; color: #166534; }
+      .error { background: #fee2e2; color: #991b1b; }
+    </style>
+    <script src="config.js"></script>
+  </head>
+    <body>
+
+      <div class="login-container">
+        <div class="login-card">
+          <h2 style="text-align:center;">Login</h2>
+
+          <div class="role-tabs">
+            <button id="studentTab" class="active">Login as Student</button>
+            <button id="adminTab">Login as Admin</button>
+          </div>
+
+          <form id="loginForm">
+            <input type="hidden" id="role" value="student" />
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter email" required />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" id="password" class="form-control" placeholder="Enter password" required />
+            </div>
+            <button type="submit" class="btn login-action-btn2">Login</button>
+          </form>
+
+          <div class="msg" id="loginMsg"></div>
+          <div style="text-align:center; margin-top: 15px;">
+          <p>New student? <a href="register.html">Register here</a></p>
+          <a class="btn theme_btn button_hover" href="index.html">Home</a>
+          </div>
+
+        </div>
+      </div>
+
+          <script>
+                const studentTab = document.getElementById("studentTab");
+                const adminTab = document.getElementById("adminTab");
+                const roleInput = document.getElementById("role");
+
+                studentTab.onclick = () => {
+                  roleInput.value = "student";
+                  studentTab.classList.add("active");
+                  adminTab.classList.remove("active");
+                };
+
+                adminTab.onclick = () => {
+                  roleInput.value = "admin";
+                  adminTab.classList.add("active");
+                  studentTab.classList.remove("active");
+                };
+
+                const form = document.getElementById("loginForm");
+                const msg = document.getElementById("loginMsg");
+                const storedEmail = localStorage.getItem("studentEmail");
+                    form.addEventListener("submit", async (e) => {
+                        e.preventDefault();
+
+                  const email = document.getElementById("email").value;
+                  const password = document.getElementById("password").value;
+                  const role = roleInput.value;
+
+                 const endpoint =
+                  role === "admin"
+                    ? `${API_BASE_URL}/api/admin-login`
+                    : `${API_BASE_URL}/api/student-login`;
+
+                  try {
+                    const response = await fetch(endpoint, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ email, password }),
+                    });
+
+                    const result = await response.json();
+                    msg.style.display = "block";
+
+                    if (response.ok && (result.message === 'Login successful' || result.message === 'Admin login successful')) 
+                    {
+                      msg.textContent = "✅ Login successful!";
+                      msg.className = "msg success";
+
+                      if (role === "student") {
+                        // ✅ Store student object properly
+                        localStorage.setItem("student", JSON.stringify(result.user));
+                        window.location.href = "index.html";
+                      } else if (role === "admin") {
+                        localStorage.setItem("isAdmin", "true"); // store session
+                        window.location.href = "admin.html";
+                      }
+                    } else {
+                      msg.textContent = result.message || "Login failed";
+                      msg.className = "msg error";
+                    }
+
+                  } catch (err) {
+                    console.error(err);
+                    msg.textContent = "Error connecting to server";
+                    msg.className = "msg error";
+                    msg.style.display = "block";
+                  }
+                });
+          </script>
+
+    </body>
+</html>

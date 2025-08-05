@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="image/favicon.png" type="image/png">
+    <title>Internship</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="config.js"></script>
+</head>
+<div id="chatbot-container" style ="display:none;">
+    <div id="chatbot-header">Chatbot</div>
+    <div id="chatbot-messages"></div>
+    <form id="chatbot-form">
+        <input type="text" id="chatbot-input" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+    </form>
+</div>
+        <script>
+                    const chatbotMessages = document.getElementById('chatbot-messages');
+                    const chatbotForm = document.getElementById('chatbot-form');
+                    const chatbotInput = document.getElementById('chatbot-input');
+
+                    function addMessage(text, sender = 'user') {
+                        const msg = document.createElement('div');
+                        msg.textContent = text;
+                        msg.style.margin = '8px 0';
+                        msg.style.textAlign = sender === 'user' ? 'right' : 'left';
+                        msg.style.color = sender === 'user' ? '#4e54c8' : '#222';
+                        chatbotMessages.appendChild(msg);
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }
+
+                    function botReply(userText) {
+                        userText = userText.toLowerCase();
+                        if (userText.includes('hello') || userText.includes('hi')) {
+                            return "Hello! How can I help you today?";
+                        } else if (userText.includes('internship')) {
+                            return "You can find internships in the 'Actively Hiring' section above!";
+                        } else if (userText.includes('contact')) {
+                            return "Visit our Contact page for more info.";
+                        } else {
+                            return "Sorry, I am a simple chatbot. Please ask about internships or contact info!";
+                        }
+                    }
+
+                    chatbotForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const userText = chatbotInput.value.trim();
+                        if (userText) {
+                            addMessage(userText, 'user');
+                            setTimeout(() => {
+                                addMessage(botReply(userText), 'bot');
+                            }, 600);
+                            chatbotInput.value = '';
+                        }
+                    });
+        </script>
+    <body>
+            <header class="header_area">
+                <div class="container position-relative">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand logo_h" href="index.html">
+                            <img src="image/01-.png" alt="Inter.site Logo" class="navbar-logo img-fluid">
+                        </a>
+                        
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto menu_nav">
+                                <li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+                                <li class="nav-item"><a class="nav-link" href="about2.html">Applied</a></li>
+                                <li class="nav-item"><a href="https://formsubmit.co/el/menayi" class="nav-link" target="_blank" rel="noopener">Contact</a></li>
+                                <li class="nav-item search-nav-item position-relative">
+                                    <button type="button" class="navbar-search-toggle"  aria-label="Open Search">
+                                        <span class="lnr lnr-magnifier"></span>Search
+                                    </button>
+                                    
+                                    <div class="navbar-search-dropdown">
+                                        <form class="navbar-search-form" action="#" method="get">
+                                            <input type="text" class="navbar-search-input" placeholder="Type to search..." name="q" autocomplete="off">
+                                            <button type="submit" class="navbar-search-btn" aria-label="Search">
+                                                <span class="lnr lnr-magnifier"></span>
+                                                <span class="search-btn-text" style="margin-left:8px;">Search</span>
+                                            </button>
+                                        </form>
+                                        <div class="search-graphic"></div>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="btn login-action-btn" href="login.html">
+                                        <span class="lnr lnr-user"></span> Login
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <section class="statistics-bar">
+                        <div class="stat-box">
+                            <div class="stat">
+                            <span class="icon">🏢</span>
+                            <span class="number" data-count="120">0</span>
+                            <span class="label">Companies</span>
+                            </div>
+                            <div class="stat">
+                            <span class="icon">💼</span>
+                            <span class="number" data-count="350">0</span>
+                            <span class="label">Internships</span>
+                            </div>
+                            <div class="stat">
+                            <span class="icon">🎓</span>
+                            <span class="number" data-count="5000">0</span>
+                            <span class="label">Students</span>
+                            </div>
+                        </div>
+                    </section>
+                    
+                </div>
+            </header>
+            <section class="banner_area">
+                <div class="booking_table d-flex align-items-center">
+                   <div class="overlay bg-parallax"></div>
+                    <div class="container">
+                        
+                    <div class="banner_content text-center">
+                        
+                            <h6>Time to Explore</h6>
+                            <h2>Find Internship</h2>
+                            <h3>Or do an Industrial visit</h3>
+                            <p>If you want to know about internships <br> Or if you want to know about industrial visits.... Just click below </p>
+                            <a class="btn theme_btn button_hover" href="https://buildyourfuture.withgoogle.com/internships">Know More</a>
+                            
+                        </div>
+                       </div>
+                </div>
+                
+                           
+                <div class="hotel_booking_area position">
+                    <div class="container">
+                        <div class="hotel_booking_table row align-items-center">
+                            <div class="col-md-3">
+                                <h2>Book<br> Your Industrial Visit</h2>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="boking_table">
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4">
+                                            
+                                        <a href="https://formsubmit.co/el/menayi" class="book_now_btn button_hover"  target="_blank" rel="noopener">Book Now</a>
+
+                                        </div>
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+                <div class="animated-stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    
+                </div>
+            </section>
+            <button id="chatbot-toggle" class="chatbot-toggle-btn" aria-label="Open Chatbot">
+                <img src="image/chat-icon.png" alt="Chat" style="width:32px;height:32px;" class="img-fluid">
+            </button>
+
+
+            <section class="accomodation_area section_gap">
+                <div class="container">
+                    <div class="section_title text-center">
+                        <h2 class="title_color">Find Internship</h2>
+                        <p>Let's find some new internships according to our field and open gates of opportunities</p>
+                    </div>
+                    <section id="internship-section">
+                        <h2 class="section-heading">Available Internships</h2><br>
+                        <marquee style="color: red;"><h4>"Login as student to apply for internship."</h3></marquee>
+                        <div class="internship-carousel-container">
+                            <button class="scroll-btn left-btn" onclick="scrollCarousel(-1)">&#8592;</button>
+                            <div id="internships" class="internship-carousel"></div>
+                            <button class="scroll-btn right-btn" onclick="scrollCarousel(1)">&#8594;</button>
+                        </div>
+                    </section> 
+                    <div class="row mb_30">
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="accomodation_item text-center">
+                                <div class="hotel_img">
+                                    <img src="image/OIP.jpg" alt="" class="img-fluid" class="img-fluid">
+                                    <a href="https://www.google.com/about/careers/applications/jobs/results/?jlo=en_US&q=Software+Engineer&target_level=INTERN_AND_APPRENTICE" class="btn theme_btn button_hover">Find Now</a>
+                                </div>
+                                <a href=""><h4 class="sec_h4">Google Internship And Industrial Visit</h4></a>
+                                <h5>Free</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="accomodation_item text-center">
+                                <div class="hotel_img">
+                                    <img src="image/ibm.jpg" alt="" class="img-fluid">
+                                    <a href="https://www.ibm.com/in-en/careers/search?field_keyword_18%5B0%5D=Internship" class="btn theme_btn button_hover">Find Now</a>
+                                </div>
+                                <a href="#"><h4 class="sec_h4">IBM Internship And Industrial Visit</h4></a>
+                                <h5>Free</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="accomodation_item text-center">
+                                <div class="hotel_img">
+                                    <img src="image/info.jpg" alt="" class="img-fluid">
+                                    <a href="https://career.infosys.com/joblist?countrycode=IN&companyhiringtype=IL" class="btn theme_btn button_hover">Find Now</a>
+                                </div>
+                                <a href="#"><h4 class="sec_h4">Infosys Internship And Industrial Visit</h4></a>
+                                <h5>Free</h5>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="accomodation_item text-center">
+                                <div class="hotel_img">
+                                    <img src="image/cog.jpg" alt="" class="img-fluid">
+                                    <a href="https://cognizant.taleo.net/careersection/iam/accessmanagement/login.jsf?lang=en&redirectionURI=https%3A%2F%2Fcognizant.taleo.net%2Fcareersection%2Fcam%2Fjobapply.ftl%3Fjob%3D45045%26lang%3Den%26source%3DCWS-13082%26src%3DCWS-13082&TARGET=https%3A%2F%2Fcognizant.taleo.net%2Fcareersection%2Fcam%2Fjobapply.ftl%3Fjob%3D45045%26lang%3Den%26source%3DCWS-13082%26src%3DCWS-13082" class="btn theme_btn button_hover">Find Now</a>
+                                </div>
+                                <a href="#"><h4 class="sec_h4">Cognizant Internship And Industrial Visit</h4></a>
+                                <h5>Free</h5>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center mt-4">
+                            <a class="btn theme_btn button_hover" href="#">Find More Internships</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+
+            <section class="facilities_area section_gap">
+                <div class="overlay bg-parallax"></div>
+                <div class="container">
+                    <div class="section_title text-center">
+                        <h2 class="title_w">Actively Hiring</h2>
+                        <div class="d-flex justify-content-center mt-3 mb-4">
+                            <div class="scrolling-cards2">
+                                <a href="https://www.linkedin.com/jobs/search/?keywords=Deep%20Dive%20AI%20Internship" target="_blank">
+                                    <img src="image/linkedin.png" alt="LinkedIn" class="platform-logo1 img-fluid">
+                                </a>
+                                <a href="https://wellfound.com/jobs" target="_blank">
+                                    <img src="image/wellfound.png" alt="Wellfound" class="platform-logo3 img-fluid">
+                                </a>
+                                <a href="https://www.glassdoor.co.in/Job/jobs.htm?sc.keyword=deep+dive+AI+internship" target="_blank">
+                                    <img src="image/glassdoor.png" alt="Glassdoor" class="platform-logo2 img-fluid">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb_30">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="facilities_item">
+                                <h4 class="sec_h4"><i class="lnr lnr-dinner"></i>TCS</h4>
+                                <h6>2K-4k per week</h6>
+                                <p>TCS makes it possible for you to achieve your fullest potential. We nurture our talent, and equip them to contribute to the creation of a better future.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="facilities_item">
+                                <h4 class="sec_h4"><i class="lnr lnr-bicycle"></i>Infosys</h4>
+                                <h6>Summer Internship</h6>
+                                <p>The Infosys Summer Internship is an exclusive program for management graduates from select business schools in the country to gain experience of working at Infosys on live projects and challenging assignments.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="facilities_item">
+                                <h4 class="sec_h4"><i class="lnr lnr-shirt"></i>IBM</h4>
+                                <h6>Backend Developer</h6>
+                                <p>IBM internships are open for applications on a rolling basis, but the deadlines may vary by region and program. Check the IBM careers website for more details.</p>
+                            </div>
+                        </div>
+                        <div class="scrolling-cards w-100 mt-4">
+                            <div class="scrolling-track">
+                                <div class="job-card">🌐 <strong>AI Intern – LearnTube.ai</strong><br>Mumbai · ₹8k–15k · Immediate</div>
+                                <div class="job-card">🤖 <strong>ML Intern – OpenAI Projects</strong><br>Remote · Stipend Based · 6 weeks</div>
+                                <div class="job-card">📊 <strong>Data Science Intern – Turing</strong><br>Remote · Global Teams</div>
+                                <div class="job-card">💡 <strong>Student Researcher – Google</strong><br>DeepMind Labs · Summer 2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                      
+
+            <section class="about_history_area section_gap">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <div class="about_content">
+                                <h2 class="title title_color">Our Mission & Vision</h2>
+                                <p>We want to make the process of finding the internship visits and as smooth and hassle free as much we can with all our capability and knowledge.</p>
+                                <a href="https://jadirectives.com/challenges-every-intern-face-as-a-newbie/" class="button_hover theme_btn_two">More about the issue.</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img class="img-fluid" src="image/why.jpg" alt="img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="latest_blog_area section_gap bg-lightgrey">
+                <div class="container">
+                    <div class="section_title text-center mb-4">
+                        <h2 class="title_color">Latest posts from Industries</h2>
+                        <p>Time to get updated of latest events in Industries </p>
+                    </div>
+                    <div class="row mb_30">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-recent-blog-post">
+                                <div class="details">
+                                    <div class="tags">
+                                        <a href="#" class="button_hover tag_btn">Technical</a>
+                                        <a href="#" class="button_hover tag_btn">Competitive Coding</a>
+                                    </div>
+                                    <a href="#"><h4 class="sec_h4">What's New </h4></a>
+                                    <p>Internships of software development paid or unpaid are currently going on in IBM</p>
+                                    <h6 class="date title_color">31st January,2024</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-recent-blog-post">
+                                <div class="details">
+                                    <div class="tags">
+                                        <a href="#" class="button_hover tag_btn">Technical</a>
+                                        <a href="#" class="button_hover tag_btn">Database Management</a>
+                                    </div>
+                                    <a href="#"><h4 class="sec_h4">What's New</h4></a>
+                                    <p>Wipro is currently hiring clients for database management of 3 years experience.</p>
+                                    <h6 class="date title_color">21st January,2024</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-recent-blog-post">
+                                <div class="details">
+                                    <div class="tags">
+                                        <a href="#" class="button_hover tag_btn">Technical</a>
+                                        <a href="#" class="button_hover tag_btn">Backend Developer</a>
+                                    </div>
+                                    <a href="#"><h4 class="sec_h4">What's New</h4></a>
+                                    <p>Infosys is having internships regarding Backend development for softwares and websites.</p>
+                                    <h6 class="date title_color">19st January,2024</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+                <script>
+                    document.querySelectorAll('.navbar-search-toggle').forEach(function(btn) {
+                        btn.addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            var navItem = btn.closest('.search-nav-item');
+                            navItem.classList.toggle('active');
+                            if (navItem.classList.contains('active')) {
+                                navItem.querySelector('.navbar-search-input').focus();
+                            }
+                        });
+                    });
+                </script>
+                <script>
+                    document.getElementById('chatbot-toggle').onclick = function() {
+                        var bot = document.getElementById('chatbot-container');
+                        bot.style.display = (bot.style.display === 'none' || bot.style.display === '') ? 'flex' : 'none';
+                    };
+                </script>
+                <footer class="footer-area ">
+                    <div class="container">
+                            <p class="">
+                                <center><marquee>This web application is developed by Harsh Srivastava.</marquee></center>
+                            </p>
+                        </div>
+                </footer> 
+                    <script>
+                        window.addEventListener('scroll', function() {
+                            document.querySelectorAll('.section_gap').forEach(function(sec) {
+                                let rect = sec.getBoundingClientRect();
+                                if(rect.top < window.innerHeight - 60) {
+                                    sec.classList.add('visible');
+                                }
+                            });
+                        });
+                        window.dispatchEvent(new Event('scroll')); // Initial trigger
+                    </script>
+                    <script>
+                         document.querySelectorAll('.stat-number').forEach(function(el) {
+                                let count = +el.getAttribute('data-count');
+                                let current = 0;
+                                let increment = Math.ceil(count / 60);
+                                let interval = setInterval(function() {
+                                    current += increment;
+                                    if(current >= count) {
+                                        el.textContent = count;
+                                        clearInterval(interval);
+                                    } else {
+                                        el.textContent = current;
+                                    }
+                                }, 24);
+                            });
+                    </script>
+                    <script>
+                        async function loadInternships() {
+                            try {
+                            const response = await fetch(`${API_BASE_URL}/api/internships`);
+                            const internships = await response.json();
+                            const container = document.getElementById('internships');
+                            container.innerHTML = "";
+
+                            internships.forEach(intern => {
+                                const card = document.createElement('div');
+                                card.className = "internship-card";
+                                card.innerHTML = `
+                                <h3>${intern.title}</h3>
+                                <p><strong>🏢 Company:</strong> ${intern.company}</p>
+                                <p><strong>📍 Location:</strong> ${intern.location}</p>
+                                <p>${intern.description.length > 120 ? intern.description.substring(0, 120) + '...' : intern.description}</p>
+                                <p><em>📅 Posted on: ${new Date(intern.posted_on).toDateString()}</em></p>
+                                <a href="#" class="apply-btn" onclick="applyNow(${intern.id}, event)">Apply Now →</a>
+                                `;
+                                container.appendChild(card);
+                            });
+                            } catch (err) {
+                            console.error("❌ Error loading internships:", err);
+                            }
+                        }
+
+                        function applyNow(internshipId, event) {
+                            event.preventDefault(); // ⛔ Prevent default <a href="#"> behavior
+
+                            const student = JSON.parse(localStorage.getItem('student'));
+                            if (!student || !student.email) {
+                            alert("Please log in to apply for internships.");
+                            window.location.href = "login.html";
+                            return;
+                            }
+
+                            // ✅ Go to apply page with internship ID
+                            window.location.href = `apply.html?internship_id=${internshipId}`;
+                        }
+
+                        // Run when the page loads
+                        window.onload = loadInternships;
+                    </script>
+                      
+                      <script>
+                        async function loadInternships() {
+                            try {
+                            const response = await fetch(`${API_BASE_URL}/api/internships`);
+                            const internships = await response.json();
+                            const container = document.getElementById('internships');
+                            container.innerHTML = "";
+
+                            internships.forEach(intern => {
+                                const card = document.createElement('div');
+                                card.className = "internship-card";
+                                card.innerHTML = `
+                                <div class="card-content">
+                                    <h3>${intern.title}</h3>
+                                    <p><strong>🏢 Company:</strong> ${intern.company}</p>
+                                    <p><strong>📍 Location:</strong> ${intern.location}</p>
+                                    <p>${intern.description}</p>
+                                    <p><em>📅 Posted on: ${new Date(intern.posted_on).toDateString()}</em></p>
+                                </div>
+                                <button class="btn apply-btn" onclick="handleApply(${intern.id})">Apply Now</button>
+ `;
+                                container.appendChild(card);
+                            });
+                            } catch (err) {
+                            console.error("❌ Error loading internships:", err);
+                            }
+                        }
+
+                        function applyNow(internshipId, event) {
+                            event.preventDefault(); // ⛔ prevent <a href="#"> default behavior
+
+                            const student = JSON.parse(localStorage.getItem("student"));
+                            if (!student || !student.email) {
+                            alert("Please log in to apply for internships.");
+                            window.location.href = "login.html";
+                            return;
+                            }
+
+                            window.location.href = `apply.html?internship_id=${internshipId}`;
+                        }
+
+                        // Load internships on page load
+                        window.onload = loadInternships;
+                    </script>
+                     
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const counters = document.querySelectorAll('.number');
+                            counters.forEach(counter => {
+                            const update = () => {
+                                const target = +counter.getAttribute('data-count');
+                                const current = +counter.innerText;
+                                const increment = Math.ceil(target / 30);
+                                if (current < target) {
+                                counter.innerText = Math.min(current + increment, target);
+                                setTimeout(update, 50);
+                                }
+                            };
+                            update();
+                            });
+                        });
+                    </script>   
+                    <script>
+                        function scrollCarousel(direction) {
+                            const carousel = document.getElementById('internships');
+                            const scrollAmount = 320;
+                            carousel.scrollBy({
+                            left: direction * scrollAmount,
+                            behavior: 'smooth'
+                            });
+                        }
+                    </script>
+                    
+                    <script>
+                        function handleApply(internshipId) {
+                            const student = JSON.parse(localStorage.getItem("student"));
+                            if (!student || !student.email) {
+                            alert("Please login first to apply.");
+                            window.location.href = "login.html";
+                            return;
+                            }
+                            window.location.href = `apply.html?internship_id=${internshipId}`;
+                        }
+                    </script>
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+
+    </body>
+</html>

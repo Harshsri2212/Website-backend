@@ -1,0 +1,88 @@
+.booking-body {
+  font-family: 'Poppins', sans-serif;
+  background: url("image/banner_bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  padding: 40px;
+  margin: 20px;
+}
+
+.booking-card {
+  width: 100%;
+}
+
+.booking-title {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 28px;
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 10px;
+}
+.booking-title::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: #ff6347;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.booking-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.booking-form label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.booking-form input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+.booking-form input:focus {
+  border-color: #ff6347;
+  outline: none;
+  box-shadow: 0 0 8px rgba(255,99,71,0.4);
+}
+
+.btn-submit {
+  background-color: #ff6347;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+  background-color: #e5533d;
+}
+
+.center {
+  text-align: center;
+}
