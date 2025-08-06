@@ -349,7 +349,7 @@
         const [internRes, studentRes, applyRes] = await Promise.all([
           fetch(`${API_BASE_URL}/api/internships`),
           fetch(`${API_BASE_URL}/api/students`),
-          fetch(`${API_BASE_URL}/api/applied`)
+          fetch(`${API_BASE_URL}/api/admin/applications`)
         ]);
 
         const internships = await internRes.json();
