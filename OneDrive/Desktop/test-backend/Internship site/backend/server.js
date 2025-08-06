@@ -17,25 +17,25 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const db = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: process.env.MYSQLPORT
+  port: process.env.MYSQLPORT,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log('✅ Connected to MySQL database');
-});
+
 
 // ✅ Internship Listing Route
 app.get('/api/internships', (req, res) => {
   console.log("🟢 /api/internships called");
   const sql = 'SELECT * FROM internships ORDER BY posted_on DESC';
-  db.query(sql, (err, result) => {
+  pool.query(sql, (err, result) => {
     if (err) {
       console.error("❌ MySQL error:", err);
       return res.status(500).send('Database query failed');
@@ -51,7 +51,7 @@ app.post('/api/internships', (req, res) => {
   const { title, company, location, description } = req.body;
   const sql = `INSERT INTO internships (title, company, location, description, posted_on)
                VALUES (?, ?, ?, ?, CURDATE())`;
-  db.query(sql, [title, company, location, description], (err, result) => {
+  pool.query(sql, [title, company, location, description], (err, result) => {
     if (err) {
       console.error("❌ SQL Error:", err);
       return res.status(500).send(err);
@@ -71,7 +71,7 @@ app.post('/api/apply', (req, res) => {
     VALUES (?, ?, ?, ?, ?)
   `;
 
-  db.query(sql, [student_name, student_email, internship_id, applied_on, message], (err, result) => {
+  pool.query(sql, [student_name, student_email, internship_id, applied_on, message], (err, result) => {
     if (err) {
       console.error("❌ SQL Error in /api/apply:", err);
       return res.status(500).json({ message: 'Database error' });
@@ -115,7 +115,7 @@ app.post('/api/register', async (req, res) => {
     const hashedPassword =  bcrypt.hashSync(password, 10);
 
     const sql = `INSERT INTO students (name, email, password) VALUES (?, ?, ?)`;
-    db.query(sql, [name, email, hashedPassword], (err, result) => {
+    pool.query(sql, [name, email, hashedPassword], (err, result) => {
       if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
           return res.status(400).json({ message: 'Email already registered' });
@@ -134,7 +134,7 @@ app.post('/api/student-login', (req, res) => {
   const { email, password } = req.body;
   const sql = 'SELECT * FROM students WHERE email = ?';
 
-  db.query(sql, [email], async (err, results) => {
+  pool.query(sql, [email], async (err, results) => {
     if (err) return res.status(500).send(err);
     if (results.length === 0) return res.status(400).json({ message: 'Student not found' });
 
@@ -179,7 +179,7 @@ app.get('/api/applied', (req, res) => {
     ORDER BY a.applied_on DESC
   `;
 
-  db.query(sql, [studentEmail], (err, results) => {
+  pool.query(sql, [studentEmail], (err, results) => {
     if (err) {
       console.error("❌ Error fetching applied internships:", err);
       return res.status(500).json({ error: "Database error" });
@@ -192,7 +192,7 @@ app.get('/api/applied', (req, res) => {
 // ✅ New route to get all students
 app.get('/api/students', (req, res) => {
   const sql = 'SELECT * FROM students';
-  db.query(sql, (err, result) => {
+  pool.query(sql, (err, result) => {
     if (err) {
       console.error("❌ Failed to fetch students:", err);
       return res.status(500).json({ error: "Database error" });
@@ -205,7 +205,7 @@ app.delete('/api/applications/:id', (req, res) => {
   const id = req.params.id;
 
   const sql = 'DELETE FROM applied_internships WHERE id = ?';
-  db.query(sql, [id], (err, result) => {
+  pool.query(sql, [id], (err, result) => {
     if (err) {
       console.error("❌ Failed to delete application:", err);
       return res.status(500).json({ message: 'Database error' });
@@ -232,7 +232,7 @@ app.get('/api/admin/applications', (req, res) => {
     ORDER BY a.applied_on DESC
   `;
 
-  db.query(sql, (err, results) => {
+  pool.query(sql, (err, results) => {
     if (err) {
       console.error("❌ Error fetching applications for admin:", err);
       return res.status(500).json({ error: "Database error" });
